@@ -13,7 +13,7 @@ def main():
     driver.set_window_size(1920, 1080)
     driver.find_element_by_id("rating-graph-expand").click()
     png = driver.find_element_by_class_name("mt-2").screenshot_as_png
-    with open("./screenshot.png", "wb") as f:
+    with open("./docs/image/screenshot.png", "wb") as f:
         f.write(png)
     driver.close
 
