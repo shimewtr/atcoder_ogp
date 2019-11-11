@@ -4,6 +4,7 @@
 import math
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from PIL import Image
 
 image_path = "./docs/image/screenshot.png"
@@ -17,6 +18,12 @@ def main():
 def capture_atcoder_rating():
     options = Options()
     options.add_argument("--headless")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("start-maximized")
+    options.add_argument("disable-infobars")
+    options.add_argument("--disable-extensions")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--no-sandbox")
     driver = webdriver.Chrome(options=options)
     driver.get("https://atcoder.jp/users/wawawatataru")
     driver.set_window_size(1920, 1080)
