@@ -2,8 +2,8 @@ name: capture atcoder rate
 
 on:
   push:
-    branches:
-      - develop
+    schedule:
+      - cron:  * */2 * * *
 
 jobs:
   capture:
@@ -24,12 +24,11 @@ jobs:
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: |
-          git config --local user.name wawawatataru
-          git config --local user.email wawawatataru@gmail.com
+          git config --local user.name githubactions
           git remote set-url origin https://wawawatataru:${ACCESS_TOKEN}@github.com/wawawatataru/atcoder_ogp.git
       - name: Git commit
         run: |
-          git checkout -b develop origin/develop
+          git checkout -b master origin/master
           git add -A
           DIFF=`git diff --cached --numstat | wc -l`
           if [ $DIFF -eq 0 ]; then
