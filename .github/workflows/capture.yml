@@ -2,9 +2,8 @@ name: capture atcoder rate
 
 on:
   push:
-    schedule:
-      - cron: 0 */2 * * *
-
+    branches:
+      - develop
 jobs:
   capture:
     name: Build production
@@ -14,26 +13,33 @@ jobs:
         with:
           ref: remotes/origin/master
 
-      - name: Build Docker
-        run: |
-          docker build -t atcoder_ogp .
-          docker run -d -p 80:80 --name capture -v $(pwd):/home/rotelstift/python_capture atcoder_ogp
-          docker cp capture:/home/rotelstift/python_capture/docs/image/screenshot.png ./docs/image/screenshot.png
-
       - name: Setup git
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: |
           git config --local user.name githubactions
           git remote set-url origin https://wawawatataru:${ACCESS_TOKEN}@github.com/wawawatataru/atcoder_ogp.git
-      - name: Git commit
+
+      - name: Git pull
         run: |
           git checkout -b master origin/master
+          git pull origin master
+
+      - name: Build Docker
+        run: |
+          docker build -t atcoder_ogp .
+          # docker run -d -p 80:80 --name capture -v $(pwd):/home/rotelstift/python_capture atcoder_ogp
+          docker run -d -p 80:80 --name capture  atcoder_ogp
+          docker cp capture:/home/rotelstift/python_capture/docs/image/screenshot.png ./docs/image/screenshot.png
+
+      - name: Git commit
+        run: |
           git add -A
-          DIFF=`git diff --cached --numstat | wc -l`
-          if [ $DIFF -eq 0 ]; then
-            exit 0
-          fi
-          git commit -am '[UPDATE] capture'
+          # DIFF=`git diff --cached --numstat | wc -l`
+          # if [ $DIFF -eq 0 ]; then
+          #   exit 0
+          # fi
+          git commit -am '[UPDATE] capture' --allow-empty
+
       - name: Git push
-        run: git push origin HEAD
+        run: git push origin master
