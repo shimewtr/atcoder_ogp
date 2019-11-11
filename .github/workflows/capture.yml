@@ -3,7 +3,7 @@ name: capture atcoder rate
 on:
   push:
     schedule:
-      - cron:  * */2 * * *
+      - cron: 0 */2 * * *
 
 jobs:
   capture:
