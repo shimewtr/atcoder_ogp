@@ -1,4 +1,4 @@
-name: capture atcoder rate
+name: capture_atcoder_rate
 
 on:
   schedule:

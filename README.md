@@ -1,23 +1,30 @@
-# atcoder_ogpとは
+[![GitHub Actions Status](https://github.com/wawawatataru/atcoder_ogp/workflows/capture_atcoder_rate/badge.svg?branch=master)](https://github.com/wawawatataru/atcoder_ogp/actions)
 
-GitHub PagesとGitHub Actionsを利用した、AtCoderレーティング表示サービスです。
+# atcoder_ogp とは
 
-一定間隔ごとにAtCoderのレーティングのグラフを画像として保存し、GitHub PagesのOGPとして設定することで、
+GitHub Pages と GitHub Actions を利用した、AtCoder レーティング表示サービスです。
+
+一定間隔ごとに AtCoder のレーティングのグラフを画像として保存し、GitHub Pages の OGP として設定することで、
 
 何度もグラフの画像を撮る必要がなくなります。
 
 <img src="https://github.com/wawawatataru/atcoder_ogp/blob/master/docs/image/sample.png?raw=true" width="320px">
 
 ## 使い方
-### 取得するAtCoderのレーティング画像の設定
+
+### 取得する AtCoder のレーティング画像の設定
+
 `capture_rate.py`内でどのページの画像を取得するかを決めています。
+
 ```
 driver.get("https://atcoder.jp/users/wawawatataru")
 ```
-上記の`users/hogehoge`を自身のAtCoderのアカウント名に変更してください。
 
-### OGPの設定
-`docs/index.html`内でOGPの設定をしています。
+上記の`users/hogehoge`を自身の AtCoder のアカウント名に変更してください。
+
+### OGP の設定
+
+`docs/index.html`内で OGP の設定をしています。
 
 ```
 <head>
@@ -27,20 +34,25 @@ driver.get("https://atcoder.jp/users/wawawatataru")
 ~~~
 </head>
 ```
-Twitterなどでリンクをクリックした際の遷移先とOGPに表示する画像を決めているので、
-自身のGitHub PagesのURLと、自身のレーティングの画像を指定してください。
-その後、リポジトリのSettingからGitHub Pagesとして公開する設定を行ってください。
 
-### GitHub Actionsの設定
+Twitter などでリンクをクリックした際の遷移先と OGP に表示する画像を決めているので、
+自身の GitHub Pages の URL と、自身のレーティングの画像を指定してください。
+その後、リポジトリの Setting から GitHub Pages として公開する設定を行ってください。
+
+### GitHub Actions の設定
+
 `.github/workflows/capture.yml`で実行間隔を設定しています。
+
 ```
 on:
   schedule:
     - cron: "0 1 1-31 * *"
 ```
-AtCoderのコンテストが終了する時刻に合わせて実行頻度を変更しても問題ないと思います。
 
-また、GitHub ActionsからpushするためにACCESS_TOKENを設定しています。
+AtCoder のコンテストが終了する時刻に合わせて実行頻度を変更しても問題ないと思います。
+
+また、GitHub Actions から push するために ACCESS_TOKEN を設定しています。
+
 ```
       - name: Setup git
         env:
