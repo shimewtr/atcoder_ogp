@@ -38,7 +38,7 @@ jobs:
           if [ $DIFF -eq 0 ]; then
             exit 0
           fi
-          git commit -am 'GitHub ACtions commit' --allow-empty
+          git commit -am 'GitHub Actions commit' --allow-empty
 
       - name: Git push
         run: |
