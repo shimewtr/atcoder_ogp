@@ -2,7 +2,7 @@ name: capture_atcoder_rate
 
 on:
   schedule:
-    - cron: "0 1 1-31 * *"
+    - cron: "0 2 * * *"
 
 jobs:
   capture:
