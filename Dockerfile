@@ -17,19 +17,18 @@ RUN \
     touch /etc/default/google-chrome && \
     wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
     dpkg -i google-chrome-stable_current_amd64.deb && \
-    apt-get install -y fonts-migmix
-
-RUN apt-get install -y sudo
-RUN pip3 install --upgrade pip
-RUN pip3 install --upgrade Pillow
+    apt-get install -y fonts-migmix && \
+    apt-get install -y sudo && \
+    pip3 install --upgrade pip && \
+    pip3 install --upgrade Pillow
 
 # add sudo user
 RUN groupadd -g 1000 developer && \
-    useradd  -g      developer -G sudo -m -s /bin/bash rotelstift && \
-    echo 'rotelstift:password' | chpasswd
+    useradd  -g      developer -G sudo -m -s /bin/bash wawawatataru && \
+    echo 'wawawatataru:password' | chpasswd
 
 RUN echo 'Defaults visiblepw'                >> /etc/sudoers
-RUN echo 'rotelstift ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+RUN echo 'wawawatataru ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 # Set japanese
 RUN apt-get install -y language-pack-ja-base language-pack-ja
@@ -39,11 +38,11 @@ RUN locale-gen ja_JP.UTF-8
 ENV LANG ja_JP.UTF-8
 ENV PYTHONIOENCODIND utf_8
 
-USER rotelstift
+USER wawawatataru
 
 RUN mkdir ~/python_capture
 RUN mkdir ~/python_capture/docs
 RUN mkdir ~/python_capture/docs/image
-COPY capture_rate.py /home/rotelstift/python_capture/
-WORKDIR /home/rotelstift/python_capture/
+COPY capture_rate.py /home/wawawatataru/python_capture/
+WORKDIR /home/wawawatataru/python_capture/
 RUN python3 ./capture_rate.py

@@ -15,10 +15,10 @@ jobs:
 
       - name: Setup git
         env:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.github_token }}
         run: |
           git config --local user.name GitHubActions
-          git remote set-url origin https://wawawatataru:${ACCESS_TOKEN}@github.com/wawawatataru/atcoder_ogp.git
+          git remote set-url origin https://wawawatataru:${GITHUB_TOKEN}@github.com/wawawatataru/atcoder_ogp.git
 
       - name: Git pull
         run: |
@@ -29,7 +29,7 @@ jobs:
         run: |
           docker build -t atcoder_ogp .
           docker run -d -p 80:80 --name capture  atcoder_ogp
-          docker cp capture:/home/rotelstift/python_capture/docs/image/screenshot.png ./docs/image/screenshot.png
+          docker cp capture:/home/wawawatataru/python_capture/docs/image/screenshot.png ./docs/image/screenshot.png
 
       - name: Git commit
         run: |
