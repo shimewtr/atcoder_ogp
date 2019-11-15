@@ -18,9 +18,19 @@ GitHub Pages と GitHub Actions を利用した、AtCoder レーティング表�
 
 ```
 driver.get("https://atcoder.jp/users/wawawatataru")
+driver.find_element_by_id("rating-graph-expand").click()
+png = driver.find_element_by_class_name("mt-2").screenshot_as_png
+with open(image_path, "wb") as f:
+    f.write(png)
 ```
 
 上記の`users/hogehoge`を自身の AtCoder のアカウント名に変更してください。
+
+撮影するスクリーンショットは`driver.find_element_by_class_name("mt-2")`で指定しています。
+
+この場合は CSS セレクタの`mt-2`クラスを撮影します。
+
+必要に応じて撮影箇所や範囲を変更してください。
 
 ### OGP の設定
 
@@ -46,18 +56,28 @@ Twitter などでリンクをクリックした際の遷移先と OGP に表示�
 ```
 on:
   schedule:
-    - cron: "0 1 1-31 * *"
+    - cron: "0 1 * * *"
 ```
+
+UTC での時刻設定のため、日本の時間に合わせるには+9 時間して考える必要があります。
 
 AtCoder のコンテストが終了する時刻に合わせて実行頻度を変更しても問題ないと思います。
 
-また、GitHub Actions から push するために ACCESS_TOKEN を設定しています。
+また、GitHub Actions から push するために github_token を利用しています。
+
+ワークフローを実行するリポジトリに対する操作はこのトークンが自動的に設定されるため、
+
+特に新しい設定をする必要はありません。
 
 ```
       - name: Setup git
         env:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          ACCESS_TOKEN: ${{ secrets.github_token }}
         run: |
           git config --local user.name GitHubActions
           git remote set-url origin https://wawawatataru:${ACCESS_TOKEN}@github.com/wawawatataru/atcoder_ogp.git
 ```
+
+### 画像の取得
+
+上記で設定した画像の撮影範囲と、GitHub Actions の設定に応じて Docker を立ち上げ、画像を撮影後、撮影した画像を push することで OGP の自動更新を実現しています。
