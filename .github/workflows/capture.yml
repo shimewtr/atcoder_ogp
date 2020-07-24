@@ -1,6 +1,9 @@
 name: capture_atcoder_rate
 
 on:
+  push:
+    branches:
+      - master
   schedule:
     - cron: "0 2 * * *"
 
