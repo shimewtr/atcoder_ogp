@@ -24,11 +24,11 @@ RUN \
 
 # add sudo user
 RUN groupadd -g 1000 developer && \
-    useradd  -g      developer -G sudo -m -s /bin/bash wawawatataru && \
-    echo 'wawawatataru:password' | chpasswd
+    useradd  -g      developer -G sudo -m -s /bin/bash shimewtr && \
+    echo 'shimewtr:password' | chpasswd
 
 RUN echo 'Defaults visiblepw'                >> /etc/sudoers
-RUN echo 'wawawatataru ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+RUN echo 'shimewtr ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 # Set japanese
 RUN apt-get install -y language-pack-ja-base language-pack-ja
@@ -38,11 +38,11 @@ RUN locale-gen ja_JP.UTF-8
 ENV LANG ja_JP.UTF-8
 ENV PYTHONIOENCODIND utf_8
 
-USER wawawatataru
+USER shimewtr
 
 RUN mkdir ~/python_capture
 RUN mkdir ~/python_capture/docs
 RUN mkdir ~/python_capture/docs/image
-COPY capture_rate.py /home/wawawatataru/python_capture/
-WORKDIR /home/wawawatataru/python_capture/
+COPY capture_rate.py /home/shimewtr/python_capture/
+WORKDIR /home/shimewtr/python_capture/
 RUN python3 ./capture_rate.py

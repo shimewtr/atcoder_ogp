@@ -1,4 +1,4 @@
-[![GitHub Actions Status](https://github.com/wawawatataru/atcoder_ogp/workflows/capture_atcoder_rate/badge.svg?branch=master)](https://github.com/wawawatataru/atcoder_ogp/actions)
+[![GitHub Actions Status](https://github.com/shimewtr/atcoder_ogp/workflows/capture_atcoder_rate/badge.svg?branch=master)](https://github.com/shimewtr/atcoder_ogp/actions)
 
 # atcoder_ogp とは
 
@@ -8,7 +8,7 @@ GitHub Pages と GitHub Actions を利用した、AtCoder レーティング表�
 
 何度もグラフの画像を撮る必要がなくなります。
 
-<img src="https://github.com/wawawatataru/atcoder_ogp/blob/master/docs/image/sample.png?raw=true" width="320px">
+<img src="https://github.com/shimewtr/atcoder_ogp/blob/master/docs/image/sample.png?raw=true" width="320px">
 
 ## 使い方
 
@@ -17,7 +17,7 @@ GitHub Pages と GitHub Actions を利用した、AtCoder レーティング表�
 `capture_rate.py`内でどのページの画像を取得するかを決めています。
 
 ```
-driver.get("https://atcoder.jp/users/wawawatataru")
+driver.get("https://atcoder.jp/users/shimewtr")
 driver.find_element_by_id("rating-graph-expand").click()
 png = driver.find_element_by_class_name("mt-2").screenshot_as_png
 with open(image_path, "wb") as f:
@@ -39,8 +39,8 @@ with open(image_path, "wb") as f:
 ```
 <head>
 ~~~
-    <meta property="og:url" content="https://wawawatataru.github.io/atcoder_ogp">
-    <meta property="og:image" content="https://wawawatataru.github.io/atcoder_ogp/image/screenshot.png">
+    <meta property="og:url" content="https://shimewtr.github.io/atcoder_ogp">
+    <meta property="og:image" content="https://shimewtr.github.io/atcoder_ogp/image/screenshot.png">
 ~~~
 </head>
 ```
@@ -75,7 +75,7 @@ AtCoder のコンテストが終了する時刻に合わせて実行頻度を変
           ACCESS_TOKEN: ${{ secrets.github_token }}
         run: |
           git config --local user.name GitHubActions
-          git remote set-url origin https://wawawatataru:${ACCESS_TOKEN}@github.com/wawawatataru/atcoder_ogp.git
+          git remote set-url origin https://shimewtr:${ACCESS_TOKEN}@github.com/shimewtr/atcoder_ogp.git
 ```
 
 ### 画像の取得

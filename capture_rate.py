@@ -25,7 +25,7 @@ def capture_atcoder_rating():
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
     driver = webdriver.Chrome(options=options)
-    driver.get("https://atcoder.jp/users/wawawatataru")
+    driver.get("https://atcoder.jp/users/shimewtr")
     driver.set_window_size(1920, 1080)
     driver.find_element_by_id("rating-graph-expand").click()
     png = driver.find_element_by_class_name("mt-2").screenshot_as_png
